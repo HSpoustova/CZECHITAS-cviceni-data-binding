@@ -13,21 +13,53 @@ import { useState } from 'react';
 // Zadání 6: Pokud uživatel správně vyplnil obě pole, do stavu `error` nastavte text `Přihlášení proběhlo úspěšně`.
 
 export const Ukol4 = () => {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (login === '') {
+      setError('Chybi login');
+    }
+    if (password === '') {
+      setError('Chybi heslo');
+    }
+
+    if (!(login === '' && password === '')) {
+      setError('Prihlaseni probehlo uspesne');
+    }
+
+    console.log({ login, password });
+
+    setLogin('');
+    setPassword('');
+  };
+
   return (
     <>
       <h1>Úkol 4</h1>
-      <div className="alert"></div>
-      <form>
+      <div className="alert">{error}</div>
+      <form onSubmit={handleSubmit}>
         <div className="field">
           <label>
             Login:
-            <input type="text" />
+            <input
+              onChange={(e) => setLogin(e.target.value)}
+              value={login}
+              type="text"
+            />
           </label>
         </div>
         <div className="field">
           <label>
             Heslo:
-            <input type="password" />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type="password"
+            />
           </label>
         </div>
         <button type="submit">Přihlásit</button>

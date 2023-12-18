@@ -7,14 +7,33 @@ import { useState } from 'react';
 export const Ukol3 = () => {
   const [login, setLogin] = useState('petr');
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //setLogin('petr');
+  };
+
+  console.log(login);
+
   return (
     <>
       <h1>Úkol 3</h1>
-      <label>
-        Login:
-        <input type="text" />
-      </label>
-      <button>Vymazat</button>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Login:
+          <input
+            type="text"
+            value={login}
+            onChange={(event) => setLogin(event.target.value)}
+          ></input>
+        </label>
+        <button
+          onClick={() => {
+            setLogin('');
+          }}
+        >
+          Vymazat
+        </button>
+      </form>
     </>
   );
 };
